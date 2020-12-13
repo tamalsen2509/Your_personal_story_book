@@ -11,11 +11,11 @@ let passport = require('passport');
 let mongoose = require('mongoose');
 let session = require('express-session');
 let mongoStore = require('connect-mongo')(session);
+let helmet = require('helmet');
+
+ 
 
 
-// performance best practice 
-
-//app.use(compression())
 
 // body parser middleware
 app.use(express.urlencoded({ extended: false }));
@@ -31,7 +31,9 @@ app.use(methodOverride(function (req, res) {
     }
 }))
 
+// for basic security 
 
+app.use(helmet());
 
 
 // app middleware
