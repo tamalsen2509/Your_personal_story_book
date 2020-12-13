@@ -12,14 +12,16 @@ module.exports = (passport) => {
         callbackURL: 'https://onlinestorybook.herokuapp.com/auth/google/callback'
     },
         async (accessToken, refreshToken, profile, done) => {
-            let newUser = {
-                googleId: profile.id,
-                displayName: profile.displayName,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                image:profile.photos[0].value
-            }
             try {
+                
+                let newUser = {
+                    googleId: profile.id,
+                    displayName: profile.displayName,
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    image:profile.photos[0].value
+                }
+            
                 let user = await User.findOne({ googleId: profile.id })
                 if (user) {
                     done(null, user)
